@@ -1,0 +1,720 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Para Valentina Shanieth</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400;1,700&family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+  :root {
+    --gold: #c9a84c;
+    --gold-dim: #c9a84c44;
+    --gold-glow: #c9a84c22;
+    --cream: #f0e6d0;
+    --cream-dim: #e8dcc8;
+    --bg: #0d0a0f;
+    --bg2: #130f17;
+    --bg3: #1a1220;
+    --border: #2a2030;
+    --muted: #5a4f40;
+    --faint: #3a3030;
+    --ghost: #2a2030;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--bg);
+    color: var(--cream-dim);
+    font-family: 'Cormorant Garamond', serif;
+    min-height: 100vh;
+    overflow-x: hidden;
+    cursor: default;
+  }
+
+  /* ── STARS ── */
+  #stars {
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 0;
+  }
+  .star {
+    position: absolute;
+    border-radius: 50%;
+    background: var(--cream);
+    animation: twinkle var(--d) ease-in-out infinite var(--delay);
+    opacity: 0;
+  }
+  @keyframes twinkle {
+    0%,100%{opacity:0} 50%{opacity:var(--op)}
+  }
+
+  /* ── PETALS ── */
+  #petals { position: fixed; inset: 0; pointer-events: none; z-index: 1; }
+  .petal {
+    position: absolute;
+    border-radius: 50% 50% 50% 0;
+    background: radial-gradient(ellipse, #8b2252 0%, #5c1535 60%, transparent 100%);
+    animation: fall linear infinite;
+    opacity: 0;
+  }
+  @keyframes fall {
+    0%   { transform: translateY(-20px) rotate(0deg) scale(1);   opacity: 0.8; }
+    80%  { opacity: 0.5; }
+    100% { transform: translateY(110vh) rotate(400deg) scale(0.6); opacity: 0; }
+  }
+
+  /* ── LAYOUT ── */
+  .page { position: relative; z-index: 2; }
+
+  .container {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 0 32px;
+  }
+
+  /* ── HERO ── */
+  .hero {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 80px 32px;
+    position: relative;
+  }
+
+  .hero-ornament {
+    width: 1px;
+    height: 100px;
+    background: linear-gradient(to bottom, transparent, var(--gold), transparent);
+    margin: 0 auto 48px;
+    animation: fadeIn 2.5s ease forwards;
+  }
+
+  .hero-eyebrow {
+    font-size: 11px;
+    letter-spacing: 0.45em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 28px;
+    animation: fadeUp 1.4s ease 0.4s both;
+  }
+
+  .hero-name {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(36px, 7vw, 80px);
+    font-weight: 400;
+    font-style: italic;
+    line-height: 1.1;
+    color: var(--cream);
+    margin-bottom: 16px;
+    animation: fadeUp 1.4s ease 0.7s both;
+    text-shadow: 0 0 80px rgba(201,168,76,0.15);
+  }
+
+  .hero-for {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(14px, 2.5vw, 20px);
+    font-weight: 400;
+    color: var(--gold);
+    letter-spacing: 0.12em;
+    margin-bottom: 48px;
+    animation: fadeUp 1.4s ease 1s both;
+  }
+
+  .hero-verse {
+    font-size: clamp(15px, 2vw, 20px);
+    font-style: italic;
+    font-weight: 300;
+    color: var(--muted);
+    line-height: 1.9;
+    max-width: 480px;
+    animation: fadeUp 1.4s ease 1.3s both;
+  }
+
+  .hero-scroll {
+    position: absolute;
+    bottom: 40px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    animation: fadeIn 2s ease 2.5s both;
+  }
+  .hero-scroll span {
+    font-size: 10px;
+    letter-spacing: 0.35em;
+    text-transform: uppercase;
+    color: var(--ghost);
+  }
+  .scroll-bar {
+    width: 1px;
+    height: 50px;
+    background: linear-gradient(to bottom, var(--gold), transparent);
+    animation: scrollPulse 2.2s ease infinite;
+  }
+  @keyframes scrollPulse { 0%,100%{opacity:0.2} 50%{opacity:1} }
+
+  /* ── DIVIDER ── */
+  .divider {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    margin: 80px 0 60px;
+  }
+  .div-line {
+    flex: 1;
+    height: 0.5px;
+    background: linear-gradient(to right, transparent, var(--gold-dim), var(--gold), var(--gold-dim), transparent);
+  }
+  .div-diamond {
+    width: 7px; height: 7px;
+    background: var(--gold);
+    transform: rotate(45deg);
+    flex-shrink: 0;
+  }
+
+  /* ── SECTION HEADERS ── */
+  .sec-label {
+    font-size: 10px;
+    letter-spacing: 0.45em;
+    text-transform: uppercase;
+    color: var(--gold);
+    text-align: center;
+    margin-bottom: 14px;
+  }
+  .sec-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(26px, 4vw, 44px);
+    font-weight: 400;
+    font-style: italic;
+    color: var(--cream);
+    text-align: center;
+    margin-bottom: 52px;
+  }
+
+  /* ── FRASES ── */
+  .frases { display: flex; flex-direction: column; gap: 2px; }
+
+  .frase-card {
+    background: var(--bg2);
+    border: 0.5px solid var(--border);
+    padding: 44px 52px;
+    position: relative;
+    transition: border-color 0.5s ease, background 0.5s ease;
+  }
+  .frase-card:hover {
+    border-color: var(--gold-dim);
+    background: var(--bg3);
+  }
+  .frase-card::before {
+    content: '\201C';
+    position: absolute;
+    top: 10px; left: 28px;
+    font-family: 'Playfair Display', serif;
+    font-size: 100px;
+    color: var(--gold-glow);
+    line-height: 1;
+    pointer-events: none;
+  }
+
+  .frase-num {
+    font-size: 10px;
+    letter-spacing: 0.35em;
+    color: var(--gold);
+    display: block;
+    margin-bottom: 22px;
+  }
+  .frase-text {
+    font-size: clamp(18px, 2.5vw, 24px);
+    font-style: italic;
+    font-weight: 300;
+    line-height: 1.65;
+    color: var(--cream-dim);
+    margin-bottom: 28px;
+  }
+  .frase-sig {
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--faint);
+  }
+
+  /* ── GALERÍA ── */
+  .gallery {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 3px;
+  }
+
+  .gal-item {
+    aspect-ratio: 1;
+    background: var(--bg2);
+    border: 0.5px solid var(--border);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    overflow: hidden;
+    position: relative;
+    transition: border-color 0.4s ease;
+  }
+  .gal-item:hover { border-color: var(--gold-dim); }
+  .gal-item:hover .gal-ph { color: var(--muted); }
+
+  .gal-ph {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 14px;
+    color: var(--ghost);
+    transition: color 0.3s;
+    text-align: center;
+    padding: 20px;
+  }
+  .gal-ph svg { width: 36px; height: 36px; }
+  .gal-ph span { font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; }
+
+  .gal-img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: none;
+  }
+  .gal-overlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(13,10,15,0.55);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transition: opacity 0.3s;
+  }
+  .gal-item:hover .gal-overlay { opacity: 1; }
+  .gal-overlay svg { width: 26px; height: 26px; stroke: var(--gold); fill: none; stroke-width: 1.5; }
+
+  .gallery-hint {
+    text-align: center;
+    font-size: 12px;
+    font-style: italic;
+    color: var(--faint);
+    margin-top: 18px;
+  }
+
+  /* ── MÚSICA ── */
+  .music-card {
+    background: var(--bg2);
+    border: 0.5px solid var(--border);
+    padding: 48px 52px;
+    text-align: center;
+  }
+  .music-eyebrow {
+    font-size: 10px;
+    letter-spacing: 0.35em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 24px;
+  }
+  .music-row {
+    display: flex;
+    max-width: 520px;
+    margin: 0 auto;
+    border: 0.5px solid var(--border);
+  }
+  .music-input {
+    flex: 1;
+    background: var(--bg);
+    border: none;
+    padding: 14px 20px;
+    color: var(--cream-dim);
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 16px;
+    font-style: italic;
+    outline: none;
+  }
+  .music-input::placeholder { color: var(--ghost); }
+  .music-btn {
+    background: var(--gold);
+    border: none;
+    padding: 14px 22px;
+    color: var(--bg);
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 12px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: background 0.3s;
+    white-space: nowrap;
+  }
+  .music-btn:hover { background: #e0bb60; }
+  #musicPlayer { margin-top: 28px; }
+  .music-note {
+    font-size: 12px;
+    font-style: italic;
+    color: var(--faint);
+    margin-top: 16px;
+  }
+
+  /* ── TIMELINE ── */
+  .timeline { position: relative; padding-left: 32px; }
+  .timeline::before {
+    content: '';
+    position: absolute;
+    left: 0; top: 8px; bottom: 8px;
+    width: 0.5px;
+    background: linear-gradient(to bottom, var(--gold-dim), var(--gold), var(--gold-dim));
+  }
+  .tl-item {
+    position: relative;
+    margin-bottom: 48px;
+    padding-left: 24px;
+  }
+  .tl-item::before {
+    content: '';
+    position: absolute;
+    left: -37px; top: 8px;
+    width: 10px; height: 10px;
+    border: 0.5px solid var(--gold);
+    background: var(--bg);
+    transform: rotate(45deg);
+  }
+  .tl-date {
+    font-size: 10px;
+    letter-spacing: 0.35em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 10px;
+  }
+  .tl-text {
+    font-size: clamp(16px, 2vw, 20px);
+    font-style: italic;
+    font-weight: 300;
+    line-height: 1.7;
+    color: var(--cream-dim);
+  }
+
+  /* ── CIERRE ── */
+  .closing {
+    text-align: center;
+    padding: 100px 0 60px;
+  }
+  .closing-verse {
+    font-size: clamp(17px, 2.5vw, 22px);
+    font-style: italic;
+    font-weight: 300;
+    color: var(--muted);
+    line-height: 1.9;
+    max-width: 520px;
+    margin: 0 auto 52px;
+  }
+  .closing-line {
+    width: 1px;
+    height: 80px;
+    background: linear-gradient(to bottom, transparent, var(--gold), transparent);
+    margin: 0 auto 40px;
+    opacity: 0.6;
+  }
+  .closing-sig {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(32px, 5vw, 52px);
+    font-style: italic;
+    color: var(--gold);
+    margin-bottom: 12px;
+  }
+  .closing-sub {
+    font-size: 11px;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--faint);
+  }
+
+  /* ── FOOTER ── */
+  footer {
+    border-top: 0.5px solid var(--border);
+    padding: 32px;
+    text-align: center;
+  }
+  footer p {
+    font-size: 11px;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--ghost);
+  }
+
+  /* ── ANIMATIONS ── */
+  @keyframes fadeIn { from{opacity:0} to{opacity:1} }
+  @keyframes fadeUp { from{opacity:0;transform:translateY(32px)} to{opacity:1;transform:translateY(0)} }
+
+  .reveal {
+    opacity: 0;
+    transform: translateY(28px);
+    transition: opacity 0.9s ease, transform 0.9s ease;
+  }
+  .reveal.visible { opacity: 1; transform: translateY(0); }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 600px) {
+    .frase-card { padding: 32px 28px; }
+    .music-card { padding: 32px 24px; }
+    .gallery { grid-template-columns: repeat(2, 1fr); }
+    .container { padding: 0 20px; }
+  }
+</style>
+</head>
+<body>
+
+<div id="stars"></div>
+<div id="petals"></div>
+
+<div class="page">
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-ornament"></div>
+    <p class="hero-eyebrow">✦ Una página creada con el corazón ✦</p>
+    <h1 class="hero-name">Valentina Shanieth<br>Molina Bravo</h1>
+    <p class="hero-for">Para ti — siempre para ti</p>
+    <p class="hero-verse">
+      Hay personas que llegan sin avisar<br>
+      y lo cambian todo con solo existir.<br>
+      Tú eres una de esas personas.
+    </p>
+    <div class="hero-scroll">
+      <span>Descubrir</span>
+      <div class="scroll-bar"></div>
+    </div>
+  </section>
+
+  <div class="container">
+
+    <!-- FRASES -->
+    <div class="divider reveal">
+      <div class="div-line"></div><div class="div-diamond"></div><div class="div-line"></div>
+    </div>
+
+    <div class="reveal">
+      <p class="sec-label">✦ palabras que guardé para ti ✦</p>
+      <h2 class="sec-title">Lo que mi corazón quiere decirte</h2>
+    </div>
+
+    <div class="frases reveal">
+
+      <div class="frase-card">
+        <span class="frase-num">01</span>
+        <p class="frase-text">
+          Desde que te conocí, aprendí que algunas personas no se eligen —
+          simplemente aparecen y hacen que todo tenga más sentido.
+          Tú eres de esas personas, Valentina.
+        </p>
+        <span class="frase-sig">— para siempre tuyo</span>
+      </div>
+
+      <div class="frase-card">
+        <span class="frase-num">02</span>
+        <p class="frase-text">
+          Respetar tu tiempo es la forma más pura de amarte.
+          Aquí estaré, sin prisa, sin presión,
+          porque lo nuestro merece todo el espacio que necesite.
+        </p>
+        <span class="frase-sig">— con paciencia y amor</span>
+      </div>
+
+      <div class="frase-card">
+        <span class="frase-num">03</span>
+        <p class="frase-text">
+          No te pido que olvides lo que te dolió.
+          Solo te pido que sepas que contigo,
+          yo quiero que todo sea diferente —
+          que seas tú quien marque el ritmo.
+        </p>
+        <span class="frase-sig">— desde lo más profundo</span>
+      </div>
+
+      <div class="frase-card">
+        <span class="frase-num">04</span>
+        <p class="frase-text">
+          Shanieth — ese nombre tan tuyo, tan único —
+          lo pronuncio en silencio cuando pienso en ti,
+          y me recuerda que hay cosas en este mundo
+          que simplemente no se pueden reemplazar.
+        </p>
+        <span class="frase-sig">— en cada pensamiento</span>
+      </div>
+
+    </div>
+
+    <!-- GALERÍA -->
+    <div class="divider reveal">
+      <div class="div-line"></div><div class="div-diamond"></div><div class="div-line"></div>
+    </div>
+
+    <div class="reveal">
+      <p class="sec-label">✦ nuestros momentos ✦</p>
+      <h2 class="sec-title">Fotografías que guardan el alma</h2>
+    </div>
+
+    <div class="gallery reveal" id="gallery"></div>
+    <p class="gallery-hint reveal">Haz clic en cada cuadro para agregar una fotografía de ustedes dos</p>
+
+    <!-- MÚSICA -->
+    <div class="divider reveal">
+      <div class="div-line"></div><div class="div-diamond"></div><div class="div-line"></div>
+    </div>
+
+    <div class="reveal">
+      <p class="sec-label">✦ la canción que nos define ✦</p>
+      <h2 class="sec-title">Música para el alma</h2>
+    </div>
+
+    <div class="music-card reveal">
+      <p class="music-eyebrow">Pega aquí el link de la canción de ustedes</p>
+      <div class="music-row">
+        <input class="music-input" id="musicUrl" type="text" placeholder="YouTube o Spotify...">
+        <button class="music-btn" onclick="loadMusic()">Cargar</button>
+      </div>
+      <div id="musicPlayer"></div>
+      <p class="music-note">Compatible con YouTube · Spotify</p>
+    </div>
+
+    <!-- CIERRE -->
+    <div class="divider reveal">
+      <div class="div-line"></div><div class="div-diamond"></div><div class="div-line"></div>
+    </div>
+
+    <div class="closing reveal">
+      <p class="closing-verse">
+        Este espacio fue creado con cada parte de lo que siento.<br>
+        No como una despedida, sino como una promesa suave<br>
+        de que lo nuestro es real, y merece ser recordado,<br>
+        Valentina Shanieth.
+      </p>
+      <div class="closing-line"></div>
+      <p class="closing-sig">Con todo mi amor</p>
+      <p class="closing-sub">✦ siempre ✦</p>
+    </div>
+
+  </div><!-- /container -->
+
+  <footer>
+    <p>Creado con amor · Para Valentina Shanieth Molina Bravo</p>
+  </footer>
+
+</div><!-- /page -->
+
+<script>
+  // ── ESTRELLAS ──
+  const starsEl = document.getElementById('stars');
+  for (let i = 0; i < 140; i++) {
+    const s = document.createElement('div');
+    s.className = 'star';
+    const sz = Math.random() * 2 + 0.4;
+    s.style.cssText = `
+      width:${sz}px;height:${sz}px;
+      left:${Math.random()*100}%;
+      top:${Math.random()*100}%;
+      --d:${(Math.random()*4+2).toFixed(1)}s;
+      --delay:-${(Math.random()*6).toFixed(1)}s;
+      --op:${(Math.random()*0.55+0.08).toFixed(2)};
+    `;
+    starsEl.appendChild(s);
+  }
+
+  // ── PÉTALOS ──
+  const petalsEl = document.getElementById('petals');
+  function spawnPetal() {
+    const p = document.createElement('div');
+    p.className = 'petal';
+    const sz = Math.random() * 10 + 5;
+    p.style.cssText = `
+      left:${Math.random()*100}%;
+      top:-20px;
+      width:${sz}px;height:${sz*1.5}px;
+      animation-duration:${(Math.random()*9+7).toFixed(1)}s;
+      animation-delay:${(Math.random()*2).toFixed(1)}s;
+      transform:rotate(${Math.floor(Math.random()*360)}deg);
+    `;
+    petalsEl.appendChild(p);
+    setTimeout(() => p.remove(), 14000);
+  }
+  setInterval(spawnPetal, 700);
+  // Spawn a few immediately
+  for (let i = 0; i < 5; i++) setTimeout(spawnPetal, i * 200);
+
+  // ── GALERÍA ──
+  const gallery = document.getElementById('gallery');
+  for (let i = 1; i <= 6; i++) {
+    const item = document.createElement('div');
+    item.className = 'gal-item';
+    item.innerHTML = `
+      <div class="gal-ph">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round">
+          <rect x="3" y="3" width="18" height="18" rx="2"/>
+          <circle cx="8.5" cy="8.5" r="1.5"/>
+          <polyline points="21,15 16,10 5,21"/>
+        </svg>
+        <span>Momento ${i}</span>
+      </div>
+      <img class="gal-img" alt="">
+      <div class="gal-overlay">
+        <svg viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+      </div>
+    `;
+    item.addEventListener('click', () => {
+      const inp = document.createElement('input');
+      inp.type = 'file'; inp.accept = 'image/*';
+      inp.onchange = e => {
+        const file = e.target.files[0];
+        if (!file) return;
+        const reader = new FileReader();
+        reader.onload = ev => {
+          const img = item.querySelector('.gal-img');
+          const ph  = item.querySelector('.gal-ph');
+          img.src = ev.target.result;
+          img.style.display = 'block';
+          ph.style.display = 'none';
+        };
+        reader.readAsDataURL(file);
+      };
+      inp.click();
+    });
+    gallery.appendChild(item);
+  }
+
+  // ── MÚSICA ──
+  function loadMusic() {
+    const url = document.getElementById('musicUrl').value.trim();
+    const player = document.getElementById('musicPlayer');
+    if (!url) return;
+    let embed = '';
+    if (url.includes('youtube.com') || url.includes('youtu.be')) {
+      const id = url.match(/(?:v=|youtu\.be\/)([^&?/]+)/)?.[1];
+      if (id) embed = `<iframe width="100%" height="180" src="https://www.youtube.com/embed/${id}" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen style="border:0.5px solid #2a2030; margin-top:8px;"></iframe>`;
+    } else if (url.includes('spotify.com')) {
+      const id = url.match(/track\/([^?/]+)/)?.[1];
+      if (id) embed = `<iframe src="https://open.spotify.com/embed/track/${id}" width="100%" height="80" frameborder="0" allow="autoplay; clipboard-write; encrypted-media" style="border:0.5px solid #2a2030; border-radius:0; margin-top:8px;"></iframe>`;
+    }
+    player.innerHTML = embed || '<p style="color:#5a4f40;font-style:italic;margin-top:16px;">Pega un enlace de YouTube o Spotify.</p>';
+  }
+  document.getElementById('musicUrl').addEventListener('keydown', e => {
+    if (e.key === 'Enter') loadMusic();
+  });
+
+  // ── SCROLL REVEAL ──
+  const reveals = document.querySelectorAll('.reveal');
+  const io = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+  }, { threshold: 0.08 });
+  reveals.forEach(el => io.observe(el));
+</script>
+</body>
+</html>
